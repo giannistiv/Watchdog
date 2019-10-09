@@ -4,7 +4,7 @@ import time
 import threading
 
 def imageproc(arr):
-    frame = Image.open(io.BytesIO(arr))
+    frame = np.asarray(arr, dtype=np.uint8)  
 
     hog = cv2.HOGDescriptor()
     hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
