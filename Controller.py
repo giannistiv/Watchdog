@@ -2,6 +2,21 @@ import requests
 import socket
 import time
 import threading
+
+def imageproc(arr):
+    frame = Image.open(io.BytesIO(arr))
+
+    hog = cv2.HOGDescriptor()
+    hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+
+    frame = cv2.resize(frame, (1600, 1200))
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+
+    boxes, weights = hog.detectMultiScale(frame, winStride=(8,8)
+    boxes = np.array([[x, y, x + w, y + h] for (x, y, w, h) in boxes])
+    return boxes
+
 class client:
     addr=None
     controller=False
